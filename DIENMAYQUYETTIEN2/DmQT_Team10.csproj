@@ -161,6 +161,8 @@
     <Compile Include="Areas\Admin\Controllers\CashbillAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CashbillDetailAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ContactAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InstallmentBillAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InstallmentBillDetailAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Models\PrintModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -590,6 +592,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\InstallmentBillAdmin\" />
+    <Folder Include="Areas\Admin\Views\InstallmentBillDetailAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
