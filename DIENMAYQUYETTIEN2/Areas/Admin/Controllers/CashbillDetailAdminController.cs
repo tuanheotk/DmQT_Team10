@@ -1,0 +1,164 @@
+﻿using DIENMAYQUYETTIEN2.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+
+namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
+{
+    public class CashbillDetailAdminController : Controller
+    {
+        private DmQT10Entities db = new DmQT10Entities();
+
+        // Get Sale Price
+        public int SalePrice(int ProductID)
+        {
+            return db.Products.Find(ProductID).SalePrice;
+        }
+        // GET: Admin/CashbillDetailAdmin
+        public ActionResult Index()
+        {
+            if (Session["ctcashBill"] == null)
+            {
+                Session["ctcashBill"] = new List<CashBillDetail>();
+            }
+            return PartialView(Session["ctcashBill"]);
+        }
+
+        // GET: /Admin/CashBillDetails/Details/5
+        public int DonGiaBan(int ProductID)
+        {
+            return db.Products.Find(ProductID).SalePrice;
+        }
+
+        // GET: /Admin/CashBillDetails/Create
+        public PartialViewResult Create()
+        {
+            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName");
+            var model = new CashBillDetail();
+            model.BillID = 0;
+            model.Quantity = 1;
+            return PartialView(model);
+        }
+
+        // POST: Admin/CashBillDetails/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create2(CashBillDetail model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ID = Environment.TickCount;
+                model.Product = db.Products.Find(model.ProductID);
+                var ctcashBill = Session["ctcashBill"] as List<CashBillDetail>;
+                if (ctcashBill == null)
+                    ctcashBill = new List<CashBillDetail>();
+                ctcashBill.Add(model);
+                Session["ctcashBill"] = ctcashBill;
+                return RedirectToAction("Create", "CashbillAdmin");
+            }
+
+            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName", model.ProductID);
+            return View("Create", model);
+        }
+
+        public PartialViewResult Edit3()
+        {
+            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName");
+            var model = new CashBillDetail();
+            model.BillID = 0;
+            model.Quantity = 1;
+            return PartialView(model);
+        }
+        // edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit2(CashBillDetail model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ID = Environment.TickCount;
+                model.Product = db.Products.Find(model.ProductID);
+                var ctcashBill = Session["ctcashBill"] as List<CashBillDetail>;
+                if (ctcashBill == null)
+                    ctcashBill = new List<CashBillDetail>();
+                ctcashBill.Add(model);
+                Session["ctcashBill"] = ctcashBill;
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            }
+
+            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName", model.ProductID);
+            return View("Create", model);
+        }
+
+        // GET: Admin/CashBillDetails/Edit/5
+        public PartialViewResult Edit(int id)
+        {
+            
+            List<CashBillDetail> cbDetails = db.CashBillDetails.Where(c => c.BillID == id).ToList();
+            if (Session["ctcashBill"] == null)
+                Session["ctcashBill"] = new List<CashBillDetail>();
+            ViewBag.cbDetails = cbDetails;
+            ViewBag.ctcashBill = Session["ctcashBill"];
+            return PartialView();
+        }
+
+        // POST: Admin/CashBillDetails/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(CashBillDetail cashBillDetail)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(cashBillDetail).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.BillID = new SelectList(db.CashBills, "ID", "BillCode", cashBillDetail.BillID);
+            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductCode", cashBillDetail.ProductID);
+            return View(cashBillDetail);
+        }
+
+        // GET: Admin/CashBillDetails/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CashBillDetail cashBillDetail = db.CashBillDetails.Find(id);
+            if (cashBillDetail == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cashBillDetail);
+        }
+
+        // POST: Admin/CashBillDetails/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            CashBillDetail cashBillDetail = db.CashBillDetails.Find(id);
+            db.CashBillDetails.Remove(cashBillDetail);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

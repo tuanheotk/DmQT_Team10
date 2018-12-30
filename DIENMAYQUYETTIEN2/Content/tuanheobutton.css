@@ -1,0 +1,18 @@
+﻿.tuanheobutton {
+padding: 10px; 
+border-radius: 30px;
+ border: 2px solid #4CAF50; 
+ background-color: #4CAF50;
+ margin: 15px 35px; 
+ 
+
+}
+
+
+.tuanheobutton a {
+   color: #fff;
+   text-decoration: none;
+}
+.tuanheotitle {
+    margin: 15px 35px;
+}

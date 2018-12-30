@@ -1,0 +1,62 @@
+﻿@model DIENMAYQUYETTIEN2.Models.CashBillDetail
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Điện Máy Quyết Tiến</title>
+    <!-- Bootstrap core CSS-->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/Content/sb-admin.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap1.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/tuanheobutton.css" rel="stylesheet" />
+</head>
+
+@using (Html.BeginForm("Edit2", "CashbillDetailAdmin"))
+{
+    @Html.AntiForgeryToken()
+    <body>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.BillID)
+            @Html.HiddenFor(model => model.SalePrice)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductID, "ProductID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.DropDownList("ProductID", (SelectList)ViewData["ProductID"])
+                    @Html.ValidationMessageFor(model => model.ProductID)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Quantity)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add" class="btn btn-success" />
+                   
+                </div>
+            </div>
+        </div>
+        <script src="~/Scripts/jquery.min.js"></script>
+        <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+        <script src="~/Scripts/jquery.easing.min.js"></script>
+        <script src="~/Scripts/jquery.dataTables.js"></script>
+        <script src="~/Scripts/dataTables.bootstrap4.js"></script>
+        <script src="~/Scripts/sb-admin.min.js"></script>
+        <script src="~/Scripts/sb-admin-datatables.min.js"></script>
+    </body>
+}
+    

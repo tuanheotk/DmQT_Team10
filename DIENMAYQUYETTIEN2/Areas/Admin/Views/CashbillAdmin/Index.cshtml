@@ -1,0 +1,86 @@
+﻿@model IEnumerable<DIENMAYQUYETTIEN2.Models.CashBill>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<h2 class="tuanheotitle">Cash Bill</h2>
+
+<button class="tuanheobutton">
+    @Html.ActionLink("Create New", "Create")
+</button>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-table"></i> Data Table Example
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Bill Code</th>
+                        <th>CustomerName</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Date</th>
+                        <th>Shipper</th>
+                        <th>Note</th> 
+                        <th>Grand Total</th> 
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Bill Code</th>
+                        <th>CustomerName</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Date</th>
+                        <th>Shipper</th>
+                        <th>Note</th>
+                        <th>Grand Total</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BillCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Shipper)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(modelItem => item.Note)
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0} VND", item.GrandTotal)
+                            </td>                          
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Print", "Print", new { id = item.ID })
+                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
