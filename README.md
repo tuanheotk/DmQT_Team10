@@ -1,1 +1,0 @@
-# DmQT_Team10
