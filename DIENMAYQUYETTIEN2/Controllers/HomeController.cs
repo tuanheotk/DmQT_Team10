@@ -1,4 +1,4 @@
-using DIENMAYQUYETTIEN2.Models;
+﻿using DIENMAYQUYETTIEN2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +24,28 @@ namespace DIENMAYQUYETTIEN2.Controllers
             var path = Server.MapPath("~/App_Data/" + id);
             return File(path, "images");
         }
+
+        // Contact
+        [HttpGet]
+        public ActionResult Contact()
+        {
+            return View();
+            
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(Message p)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Messages.Add(p);
+                db.SaveChanges();
+                TempData["message"] = "Đã gửi liên hệ thành công!";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
 
     }
 }
