@@ -40,7 +40,15 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(Session["CashBill"]);
+            if (Session["Username"] != null)
+            {
+                return View(Session["CashBill"]);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+           
         }
 
         // POST: Admin/CashBills/Create
@@ -96,7 +104,7 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         }
 
         // GET: Admin/CashBills/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {

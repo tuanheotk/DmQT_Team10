@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
 {
@@ -21,11 +22,19 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         // GET: Admin/CashbillDetailAdmin
         public ActionResult Index()
         {
-            if (Session["ctcashBill"] == null)
+            if (Session["Username"] != null)
             {
-                Session["ctcashBill"] = new List<CashBillDetail>();
+                if (Session["ctcashBill"] == null)
+                {
+                    Session["ctcashBill"] = new List<CashBillDetail>();
+                }
+                return PartialView(Session["ctcashBill"]);
             }
-            return PartialView(Session["ctcashBill"]);
+            else
+            {
+                return RedirectToAction("Login");
+            }
+            
         }
 
         // GET: /Admin/CashBillDetails/Details/5
@@ -152,6 +161,39 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        //Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(ACCOUNT acc)
+        {
+            if (ModelState.IsValid)
+            {
+                using (DmQT10Entities db = new DmQT10Entities())
+                {
+                    var obj = db.ACCOUNTs.Where(a => a.USERNAME.Equals(acc.USERNAME) && a.PASSWORD.Equals(acc.PASSWORD)).FirstOrDefault();
+
+                    if (obj != null)
+                    {
+                        Session["Username"] = obj.USERNAME.ToString();
+                        Session["FullName"] = obj.FULLNAME.ToString();
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            return View(acc);
+        }
+        //Logout
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon(); // it will clear the session at the end of request
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

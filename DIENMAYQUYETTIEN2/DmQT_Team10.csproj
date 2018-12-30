@@ -481,6 +481,7 @@
     <Content Include="Areas\Admin\Views\CashbillDetailAdmin\Edit3.cshtml" />
     <Content Include="Areas\Admin\Views\CashbillDetailAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CashbillAdmin\Print.cshtml" />
+    <Content Include="Areas\Admin\Views\CashbillDetailAdmin\Login.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dataTables.bootstrap4.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
