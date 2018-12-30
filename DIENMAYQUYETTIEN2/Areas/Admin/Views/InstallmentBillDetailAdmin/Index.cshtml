@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DIENMAYQUYETTIEN2.Models.CashBillDetail>
+﻿@model IEnumerable<DIENMAYQUYETTIEN2.Models.InstallmentBillDetail>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,24 +27,28 @@
                         <tr>
                             <th>Product Name</th>
                             <th>Quantity</th>
-                            <th>Sale Price</th>
+                            <th>Installment Price</th>
                             <th>Grand Total</th>
+                            
                            
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Grand Total</th>
-                            <th>
-                                @{
-                                    var total = Model.Sum(m => m.SalePrice * m.Quantity);
-                                    Session["total"] = total;
-                                    @String.Format("{0:0,0} đ", total)
-                                }
-                            </th>
+                            @{
+                                var total = Model.Sum(m => m.InstallmentPrice * m.Quantity);
+                                Session["total"] = total;
+                            }
+                            <th colspan="4" style="text-align:right">Total:</th>
+                            <th>@String.Format("{0:0,0} VND", total)</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align:right; margin-right:10px;">Taken: </th>
+                            <th><input type="text" value="" class="form-control" id="taken" /></th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align:right">Remain: </th>
+                            <th><input type="text" id="remain" value="" disabled class="form-control" required /></th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -58,10 +62,10 @@
                                     @Html.DisplayFor(modelItem => item.Quantity)
                                 </td>
                                 <td>
-                                    @String.Format("{0:0,0} đ", item.SalePrice)
+                                    @String.Format("{0:0,0} đ", item.InstallmentPrice)
                                 </td>
                                 <td>
-                                    @String.Format("{0:0,0} đ", (item.Quantity * item.SalePrice))
+                                    @String.Format("{0:0,0} đ", (item.Quantity * item.InstallmentPrice))
                                 </td>
 
                                 <td>
@@ -69,8 +73,11 @@
                                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                                 </td>
                             </tr>
-                        }
+                        }   
+                        
                     </tbody>
+
+                    
                 </table>
             </div>
         </div>

@@ -17,11 +17,17 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         DmQT10Entities db = new DmQT10Entities();
         // GET: Admin/InstallmentBillAdmin
         // GET: Admin/CashbillAdmin
+
+        public int setSessionTaken(int taken)
+        {
+            Session["Taken"] = taken;
+            return (int)Session["Taken"];
+        }
         public ActionResult Index()
         {
             if (Session["Username"] != null)
             {
-                return View(db.CashBills.ToList());
+                return View(db.InstallmentBills.ToList());
             }
             else
             {
@@ -37,7 +43,8 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         {
             if (Session["Username"] != null)
             {
-                return View(Session["CashBill"]);
+                ViewBag.CustomerID = new SelectList(db.Customers, "ID", "CustomerCode");
+                return View(Session["IBill"]);
             }
             else
             {
@@ -51,14 +58,14 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CashBill model)
+        public ActionResult Create(InstallmentBill model)
         {
-            checkCashBill(model);
+            
             if (ModelState.IsValid)
             {
-                Session["CashBill"] = model;
+                Session["IBill"] = model;
             }
-
+            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "CustomerCode", model.CustomerID);
             return View(model);
         }
 
@@ -69,26 +76,30 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
             using (var scope = new TransactionScope())
                 try
                 {
-                    var cashBill = Session["CashBill"] as CashBill;
-                    var ctcashBill = Session["ctcashBill"] as List<CashBillDetail>;
-                    cashBill.Date = DateTime.Now;
-                    cashBill.GrandTotal = (int)Session["total"];
-                    db.CashBills.Add(cashBill);
+                    var iBill = Session["IBill"] as InstallmentBill;
+                    var CTHoaDonTG = Session["IBillDetail"] as List<InstallmentBillDetail>;
+                    iBill.Date = DateTime.Now;
+                    iBill.GrandTotal = (int)Session["total"];
+                    iBill.Taken = (int)Session["Taken"];
+                    iBill.Remain = ((int)Session["total"] - (int)Session["Taken"]);
+
+                    db.InstallmentBills.Add(iBill);
                     db.SaveChanges();
 
-                    foreach (var chiTiet in ctcashBill)
+                    foreach (var chiTiet in CTHoaDonTG)
                     {
-                        chiTiet.BillID = cashBill.ID;
+                        chiTiet.BillID = iBill.ID;
                         chiTiet.Product = null;
-                        db.CashBillDetails.Add(chiTiet);
+                        db.InstallmentBillDetails.Add(chiTiet);
                     }
-
                     db.SaveChanges();
                     scope.Complete();
 
-                    Session["CashBill"] = null;
-                    Session["ctcashBill"] = null;
+                    Session["IBill"] = null;
+                    Session["IBillDetail"] = null;
                     Session["total"] = null;
+                    Session["Taken"] = null;
+                    TempData["message"] = "Tạo hóa đơn thành công.";
                     return RedirectToAction("Index");
                 }
                 catch (Exception e)

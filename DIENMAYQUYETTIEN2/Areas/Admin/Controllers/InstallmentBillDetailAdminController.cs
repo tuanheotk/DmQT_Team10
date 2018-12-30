@@ -15,20 +15,20 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         private DmQT10Entities db = new DmQT10Entities();
         // GET: Admin/InstallmentBillDetailAdmin
         // Get Sale Price
-        public int SalePrice(int ProductID)
+        public int InstallmentPrice(int ProductID)
         {
-            return db.Products.Find(ProductID).SalePrice;
+            return db.Products.Find(ProductID).InstallmentPrice;
         }
         // GET: Admin/CashbillDetailAdmin
         public ActionResult Index()
         {
             if (Session["Username"] != null)
             {
-                if (Session["ctcashBill"] == null)
+                if (Session["IBillDetail"] == null)
                 {
-                    Session["ctcashBill"] = new List<CashBillDetail>();
+                    Session["IBillDetail"] = new List<InstallmentBillDetail>();
                 }
-                return PartialView(Session["ctcashBill"]);
+                return PartialView(Session["IBillDetail"]);
             }
             else
             {
@@ -47,10 +47,10 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         public PartialViewResult Create()
         {
             ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName");
-            var model = new CashBillDetail();
-            model.BillID = 0;
-            model.Quantity = 1;
-            return PartialView(model);
+            var ibillDetail = new InstallmentBillDetail();
+            ibillDetail.Quantity = 1;
+            ibillDetail.BillID = 0;
+            return PartialView(ibillDetail);
         }
 
         // POST: Admin/CashBillDetails/Create
@@ -58,18 +58,18 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create2(CashBillDetail model)
+        public ActionResult Create2(InstallmentBillDetail model)
         {
             if (ModelState.IsValid)
             {
                 model.ID = Environment.TickCount;
                 model.Product = db.Products.Find(model.ProductID);
-                var ctcashBill = Session["ctcashBill"] as List<CashBillDetail>;
-                if (ctcashBill == null)
-                    ctcashBill = new List<CashBillDetail>();
-                ctcashBill.Add(model);
-                Session["ctcashBill"] = ctcashBill;
-                return RedirectToAction("Create", "CashbillAdmin");
+                var CTHoaDonTG = Session["IBillDetail"] as List<InstallmentBillDetail>;
+                if (CTHoaDonTG == null)
+                    CTHoaDonTG = new List<InstallmentBillDetail>();
+                CTHoaDonTG.Add(model);
+                Session["IBillDetail"] = CTHoaDonTG;
+                return RedirectToAction("Create", "InstallmentBillAdmin");
             }
 
             ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName", model.ProductID);

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DIENMAYQUYETTIEN2.Models.CashBill>
+﻿@model IEnumerable<DIENMAYQUYETTIEN2.Models.InstallmentBill>
 
 @{
     ViewBag.Title = "Index";
@@ -20,26 +20,30 @@
                 <thead>
                     <tr>
                         <th>Bill Code</th>
-                        <th>CustomerName</th>
-                        <th>Phone Number</th>
-                        <th>Address</th>
+                        <th>Customer ID</th>
                         <th>Date</th>
                         <th>Shipper</th>
-                        <th>Note</th> 
+                        <th>Note</th>                        
+                        <th>Method</th> 
+                        <th>Period</th>
                         <th>Grand Total</th> 
+                        <th>Taken</th>
+                        <th>Remain</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>Bill Code</th>
-                        <th>CustomerName</th>
-                        <th>Phone Number</th>
-                        <th>Address</th>
+                        <th>Customer ID</th>
                         <th>Date</th>
                         <th>Shipper</th>
                         <th>Note</th>
+                        <th>Method</th>
+                        <th>Period</th>
                         <th>Grand Total</th>
+                        <th>Taken</th>
+                        <th>Remain</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
@@ -51,13 +55,7 @@
                                 @Html.DisplayFor(modelItem => item.BillCode)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.CustomerName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PhoneNumber)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Address)
+                                @Html.DisplayFor(modelItem => item.CustomerID)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Date)
@@ -66,10 +64,22 @@
                                 @Html.DisplayFor(modelItem => item.Shipper)
                             </td>
                             <td>
-                               @Html.DisplayFor(modelItem => item.Note)
+                                @Html.DisplayFor(modelItem => item.Note)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Method)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(modelItem => item.Period)
                             </td>
                             <td>
                                 @String.Format("{0:0,0} VND", item.GrandTotal)
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0} VND", item.Taken)
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0} VND", item.Remain)
                             </td>                          
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

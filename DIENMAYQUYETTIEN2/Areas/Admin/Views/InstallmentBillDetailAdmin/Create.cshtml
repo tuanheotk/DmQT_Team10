@@ -1,4 +1,4 @@
-﻿@model DIENMAYQUYETTIEN2.Models.CashBillDetail
+﻿@model DIENMAYQUYETTIEN2.Models.InstallmentBillDetail
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +27,7 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.BillID)
-            @Html.HiddenFor(model => model.SalePrice)
+            @Html.HiddenFor(model => model.InstallmentPrice)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.ProductID, "ProductID", htmlAttributes: new { @class = "control-label col-md-2" })
