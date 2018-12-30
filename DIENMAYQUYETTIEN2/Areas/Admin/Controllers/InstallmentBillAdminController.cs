@@ -256,20 +256,22 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         }
         public ActionResult Print(int id)
         {
-            var order = db.CashBills.FirstOrDefault(o => o.ID == id);
+            var order = db.InstallmentBills.FirstOrDefault(o => o.ID == id);
             if (order != null)
             {
-                PrintModel rp = new PrintModel();
-                rp.Address = order.Address;
+                PrintInstallmentBillModel rp = new PrintInstallmentBillModel();
                 rp.BillCode = order.BillCode;
-                rp.CustomerName = order.CustomerName;
+                rp.CustomerID = order.CustomerID;
                 rp.Date = order.Date;
-                rp.GrandTotal = order.GrandTotal;
-                rp.Note = order.Note;
-                rp.PhoneNumber = order.PhoneNumber;
                 rp.Shipper = order.Shipper;
-                rp.CashBillDetail = order.CashBillDetails.ToList();
-                return View(rp);
+                rp.Note = order.Note;
+                rp.Method = order.Method;
+                rp.Period = order.Period;
+                rp.GrandTotal = order.GrandTotal;
+                rp.Taken = order.Taken;
+                rp.Remain = order.Remain;
+                rp.InstallmentBillDetail = order.InstallmentBillDetails.ToList();
+                return PartialView(rp);
             }
             else
             {

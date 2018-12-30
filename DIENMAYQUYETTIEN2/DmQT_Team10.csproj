@@ -164,6 +164,7 @@
     <Compile Include="Areas\Admin\Controllers\InstallmentBillAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\InstallmentBillDetailAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
+    <Compile Include="Areas\Admin\Models\PrintInstallmentBillModel.cs" />
     <Compile Include="Areas\Admin\Models\PrintModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
