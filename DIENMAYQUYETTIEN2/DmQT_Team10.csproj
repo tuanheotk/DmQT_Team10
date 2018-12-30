@@ -484,6 +484,18 @@
     <Content Include="Areas\Admin\Views\CashbillDetailAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CashbillAdmin\Print.cshtml" />
     <Content Include="Areas\Admin\Views\CashbillDetailAdmin\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillAdmin\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillAdmin\Print.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Edit3.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Login.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dataTables.bootstrap4.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -592,8 +604,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\InstallmentBillAdmin\" />
-    <Folder Include="Areas\Admin\Views\InstallmentBillDetailAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

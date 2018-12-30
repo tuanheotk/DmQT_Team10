@@ -1,0 +1,117 @@
+﻿@model DIENMAYQUYETTIEN2.Models.CashBill
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+
+    <h2>Create</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+       
+            <div style="height: 20px;"></div>
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CustomerName)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Shipper, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Shipper, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Shipper)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Note, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Note)
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create Information" class="btn btn-success" />
+                        
+                    </div>
+                </div>
+            </div>
+        
+            }
+
+            @if (Session["CashBill"] != null)
+            {
+
+                @Html.Action("Create", "InstallmentBillAdmin")
+
+                @Html.Action("Index", "InstallmentBillAdmin")
+
+                <br /><br />
+                using (Html.BeginForm("Create2", "InstallmentBillAdmin"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Lập hóa đơn" class="btn btn-success" />
+                        </div>
+                    </div>
+                }
+            }
+
+            <script>
+        @*$('#ProductID').change(function () {
+            var url = '@Url.Action("DonGiaBan", "CashBillDetailAdmin")';
+        url = url + '?ProductID=' + $(this).val();
+        $.get(url, function (data) {
+            $('#DonGiaBan').val(data);
+        });
+        })*@
+
+        function getSalePrice(ProductID) {
+            var url = '@Url.Action("SalePrice", "InstallmentBillAdmin")';
+            url = url + '?ProductID=' + ProductID
+            $.get(url, function (data) {
+                $('#SalePrice').val(data);
+            });
+        }
+        $(document).ready(function () {
+            var ProductID = $("#ProductID").children("option:selected").val();
+            getSalePrice(ProductID);
+        });
+        $('#ProductID').change(function () {
+            getSalePrice($(this).val());
+        });
+            </script>

@@ -1,0 +1,100 @@
+﻿@model DIENMAYQUYETTIEN2.Models.CashBill
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CashBill</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.BillCode)
+        @Html.HiddenFor(model => model.Date)
+        @Html.HiddenFor(model => model.GrandTotal)
+
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CustomerName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Shipper, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Shipper, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Shipper)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Note, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Note)
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@Html.Action("Edit3", "InstallmentBillDetailAdmin")
+@Html.Action("Edit", "InstallmentBillDetailAdmin", new {@id = Model.ID})
+
+<br /><br />
+        @using (Html.BeginForm("Edit2", "InstallmentBillAdmin"))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Sửa hóa đơn" class="btn btn-success" />
+                </div>
+            </div>
+        }
+<script>
+        function getSalePrice(ProductID) {
+            var url = '@Url.Action("SalePrice", "InstallmentBillDetailAdmin")';
+            url = url + '?ProductID=' + ProductID
+            $.get(url, function (data) {
+                $('#SalePrice').val(data);
+            });
+        }
+        $(document).ready(function () {
+            var ProductID = $("#ProductID").children("option:selected").val();
+            getSalePrice(ProductID);
+        });
+        $('#ProductID').change(function () {
+            getSalePrice($(this).val());
+        });
+    </script>
