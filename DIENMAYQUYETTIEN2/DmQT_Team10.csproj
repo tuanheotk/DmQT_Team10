@@ -164,6 +164,7 @@
     <Compile Include="Areas\Admin\Controllers\InstallmentBillAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\InstallmentBillDetailAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductTypeAdminController.cs" />
     <Compile Include="Areas\Admin\Models\PrintInstallmentBillModel.cs" />
     <Compile Include="Areas\Admin\Models\PrintModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -497,6 +498,8 @@
     <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Edit3.cshtml" />
     <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\InstallmentBillDetailAdmin\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypeAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypeAdmin\Login.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dataTables.bootstrap4.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
