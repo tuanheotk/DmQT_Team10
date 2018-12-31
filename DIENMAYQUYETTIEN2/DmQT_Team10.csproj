@@ -503,6 +503,8 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\ProductTypeAdmin\Login.cshtml" />
     <Content Include="Areas\Admin\Views\ProductTypeAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypeAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypeAdmin\Delete.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dataTables.bootstrap4.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
