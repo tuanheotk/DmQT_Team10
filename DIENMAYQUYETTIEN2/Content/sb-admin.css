@@ -168,7 +168,8 @@ body.fixed-nav {
         padding: 1em; } }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler {
-  background-color: #212529; }
+    background-color: #ced4da;
+}
   #mainNav.fixed-top.navbar-dark .sidenav-toggler a i {
     color: #adb5bd; }
 
@@ -259,16 +260,18 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   color: #adb5bd; }
 
 @media (min-width: 992px) {
-  #mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
-    background: #343a40; }
+    #mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
+        background: #f8f9fafa;
+    }
     #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a {
       color: white !important;
       background-color: #495057; }
       #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:focus, #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:hover {
         color: white; }
-    #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
-    #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
-      background: #343a40; } }
+        #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
+        #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
+            background: #343a4012;
+        } }
 
 #mainNav.navbar-light .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
   color: rgba(0, 0, 0, 0.5); }
