@@ -64,8 +64,9 @@
                                             <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                         </div>
                                     </div>
+
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> @Html.ActionLink("Detail", "Detail", new { id = item.ID })</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -174,8 +175,8 @@
                                     <div class="product-body">
                                         <p class="product-category">Category</p>
                                         <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.ProductName)</a></h3>
-                                        <h4 class="product-price">@Html.DisplayFor(modelItem => item.SalePrice) <del class="product-old-price">@Html.DisplayFor(modelItem => item.OriginPrice)</del></h4>
-                                        <h4 class="product-price">Giá trả góp <strong class="product-old-price">@Html.DisplayFor(modelItem => item.InstallmentPrice)</strong></h4>
+                                        <h4 class="product-price">@String.Format("{0:0,0} đ", item.SalePrice) <del class="product-old-price">@String.Format("{0:0,0} đ", item.OriginPrice)</del></h4>
+                                        <h4 class="product-price">Giá trả góp <strong class="product-old-price">@String.Format("{0:0,0} đ", item.InstallmentPrice)</strong></h4>
                                         <div class="product-rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -190,7 +191,7 @@
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>@Html.ActionLink("Detail", "Detail", new { id = item.ID })</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -236,7 +237,7 @@
                             <div class="product-body">
                                 <p class="product-category">Category</p>
                                 <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.ProductName)</a></h3>
-                                <h4 class="product-price">@Html.DisplayFor(modelItem => item.SalePrice) <del class="product-old-price">@Html.DisplayFor(modelItem => item.OriginPrice)</del></h4>
+                                <h4 class="product-price">@String.Format("{0:0,0} đ", item.SalePrice) <del class="product-old-price">@String.Format("{0:0,0} đ", item.OriginPrice)</del></h4>
                                 
                             </div>
                         </div>
@@ -258,7 +259,7 @@
                                     <div class="product-body">
                                         <p class="product-category">Category</p>
                                         <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.ProductName)</a></h3>
-                                        <h4 class="product-price">@Html.DisplayFor(modelItem => item.SalePrice) <del class="product-old-price">@Html.DisplayFor(modelItem => item.OriginPrice)</del></h4>
+                                        <h4 class="product-price">@String.Format("{0:0,0} đ", item.SalePrice) <del class="product-old-price">@String.Format("{0:0,0} đ", item.OriginPrice)</del></h4>
                                         
                                     </div>
                                 </div>
@@ -291,7 +292,7 @@
                                     <div class="product-body">
                                         <p class="product-category">Category</p>
                                         <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.ProductName)</a></h3>
-                                        <h4 class="product-price">@Html.DisplayFor(modelItem => item.SalePrice) <del class="product-old-price">@Html.DisplayFor(modelItem => item.OriginPrice)</del></h4>
+                                        <h4 class="product-price">@String.Format("{0:0,0} đ", item.SalePrice) <del class="product-old-price">@String.Format("{0:0,0} đ", item.OriginPrice)</del></h4>
 
                                     </div>
                                 </div>
@@ -313,7 +314,7 @@
                                     <div class="product-body">
                                         <p class="product-category">Category</p>
                                         <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.ProductName)</a></h3>
-                                        <h4 class="product-price">@Html.DisplayFor(modelItem => item.SalePrice) <del class="product-old-price">@Html.DisplayFor(modelItem => item.OriginPrice)</del></h4>
+                                        <h4 class="product-price">@String.Format("{0:0,0} đ", item.SalePrice) <del class="product-old-price">@String.Format("{0:0,0} đ", item.OriginPrice)</del></h4>
 
                                     </div>
                                 </div>
@@ -348,7 +349,7 @@
                                     <div class="product-body">
                                         <p class="product-category">Category</p>
                                         <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.ProductName)</a></h3>
-                                        <h4 class="product-price">@Html.DisplayFor(modelItem => item.SalePrice) <del class="product-old-price">@Html.DisplayFor(modelItem => item.OriginPrice)</del></h4>
+                                        <h4 class="product-price">@String.Format("{0:0,0} đ", item.SalePrice) <del class="product-old-price">@String.Format("{0:0,0} đ", item.OriginPrice)</del></h4>
 
                                     </div>
                                 </div>
@@ -370,7 +371,7 @@
                                     <div class="product-body">
                                         <p class="product-category">Category</p>
                                         <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.ProductName)</a></h3>
-                                        <h4 class="product-price">@Html.DisplayFor(modelItem => item.SalePrice) <del class="product-old-price">@Html.DisplayFor(modelItem => item.OriginPrice)</del></h4>
+                                        <h4 class="product-price">@String.Format("{0:0,0} đ", item.SalePrice) <del class="product-old-price">@String.Format("{0:0,0} đ", item.OriginPrice)</del></h4>
 
                                     </div>
                                 </div>

@@ -6,7 +6,7 @@ using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-
+using System.Net;
 
 namespace DIENMAYQUYETTIEN2.Controllers
 {
@@ -49,6 +49,22 @@ namespace DIENMAYQUYETTIEN2.Controllers
         public ActionResult AboutUs()
         {
             return View();
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product bangsanpham = db.Products.Find(id);
+            if (bangsanpham == null)
+            {
+                return HttpNotFound();
+            }          
+                return View(bangsanpham);
+            
+          
         }
 
     }
