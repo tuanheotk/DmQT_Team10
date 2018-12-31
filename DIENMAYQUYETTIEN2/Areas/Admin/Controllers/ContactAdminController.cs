@@ -60,7 +60,7 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
             return RedirectToAction("Login");
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {

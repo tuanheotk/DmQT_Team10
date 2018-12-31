@@ -60,7 +60,7 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(InstallmentBill model)
         {
-            
+            checkib(model);
             if (ModelState.IsValid)
             {
                 Session["IBill"] = model;
@@ -200,14 +200,10 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
             return View(cashBill);
         }
 
-        private void checkCashBill(CashBill cashBill)
+        private void checkib(InstallmentBill model)
         {
-            if (cashBill.CustomerName == null || cashBill.CustomerName.Equals(""))
-                ModelState.AddModelError("CustomerName", "Tên khách hàng không được bỏ trống");
-            if (cashBill.Address == null || cashBill.Address.Equals(""))
-                ModelState.AddModelError("Address", "Địa chỉ không được bỏ trống");
-            if (cashBill.PhoneNumber == null || cashBill.PhoneNumber.Equals(""))
-                ModelState.AddModelError("PhoneNumber", "Số điện thoại không được bỏ trống");
+            if (model.Shipper == null || model.Shipper.Equals(""))
+                ModelState.AddModelError("Shipper", "Shipper không được để trống");
         }
 
         // POST: Admin/CashBills/Delete/5

@@ -222,12 +222,13 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
             {
                 ModelState.AddModelError("Quantity", "Số lượng tồn phải lớn hơn 0");
             }
-           
-                
+            if (model.ProductName == null || model.ProductName.Equals("") || model.ProductName.StartsWith(" ") || model.ProductName.EndsWith(" "))
+                ModelState.AddModelError("ProductName", "ProductName không được bỏ trống hoặc khoảng trống");
+
         }
 
         [HttpGet]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
