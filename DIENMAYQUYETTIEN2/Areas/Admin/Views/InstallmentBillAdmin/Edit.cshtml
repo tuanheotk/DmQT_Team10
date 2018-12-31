@@ -1,4 +1,4 @@
-﻿@model DIENMAYQUYETTIEN2.Models.CashBill
+﻿@model DIENMAYQUYETTIEN2.Models.InstallmentBill
 
 @{
     ViewBag.Title = "Edit";
@@ -12,37 +12,31 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>CashBill</h4>
+        <h4>Installment Bill</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.CustomerID)
+        @Html.HiddenFor(model => model.Method)
+        @Html.HiddenFor(model => model.Remain)
+        @Html.HiddenFor(model => model.Taken)
         @Html.HiddenFor(model => model.BillCode)
-        @Html.HiddenFor(model => model.Date)
         @Html.HiddenFor(model => model.GrandTotal)
+        
 
-        
         <div class="form-group">
-            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BillCode, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CustomerName)
+                @Html.TextBoxFor(model => model.BillCode, new { @class = "form-control", disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.BillCode)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PhoneNumber)
+                @Html.DropDownList("CustomerID", null, htmlAttributes: new { @class = "form-control", disabled = "true" })
+                @Html.ValidationMessageFor(model => model.CustomerID)
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Address)
-            </div>
-        </div>
-        
         <div class="form-group">
             @Html.LabelFor(model => model.Shipper, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -55,6 +49,26 @@
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Note, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Note)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Period, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Period, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Period)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Method, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Method" name="Method" class="form-control">
+                    <option value="Ngày">Ngày</option>
+                    <option value="Tuần">Tuần</option>
+                    <option value="Tháng">Tháng</option>
+                    <option value="Năm">Năm</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Method)
             </div>
         </div>
        
@@ -83,18 +97,28 @@
             </div>
         }
 <script>
-        function getSalePrice(ProductID) {
-            var url = '@Url.Action("SalePrice", "InstallmentBillDetailAdmin")';
+        function getInstallmentPrice(ProductID) {
+            var url = '@Url.Action("InstallmentPrice", "InstallmentBillDetailAdmin")';
             url = url + '?ProductID=' + ProductID
             $.get(url, function (data) {
-                $('#SalePrice').val(data);
+                $('#InstallmentPrice').val(data);
             });
         }
         $(document).ready(function () {
             var ProductID = $("#ProductID").children("option:selected").val();
-            getSalePrice(ProductID);
+            getInstallmentPrice(ProductID);
         });
         $('#ProductID').change(function () {
-            getSalePrice($(this).val());
+            getInstallmentPrice($(this).val());
         });
+
+        $('#taken').change(function () {
+            var taken = $('#taken').val();
+
+            var url = '@Url.Action("setSessionTaken", "InstallmentBillAdmin")';
+            url = url + '?taken=' + taken
+            $.get(url, function (data) {
+                $('#remain').val(@Session["total"] - data);
+            });
+        })
     </script>

@@ -112,17 +112,17 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         // GET: Admin/CashBills/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                InstallmentBill installmentBill = db.InstallmentBills.Find(id);
+                Session["IBill"] = installmentBill;
+                ViewBag.CustomerID = new SelectList(db.Customers, "ID", "CustomerCode", installmentBill.CustomerID);
+                return View(installmentBill);
             }
-            CashBill cashBill = db.CashBills.Find(id);
-            if (cashBill == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login");
             }
-            Session["CashBill"] = null;
-            return View(cashBill);
         }
 
         // POST: Admin/CashBills/Edit/5
@@ -130,23 +130,19 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CashBill cashBill)
+        public ActionResult Edit(InstallmentBill installmentBill)
         {
+            checkib(installmentBill);
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.Entry(cashBill).State = EntityState.Modified;
-                    Session["CashBill"] = cashBill;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                catch (Exception e)
-                {
-                    ModelState.AddModelError("", e.Message);
-                }
+                installmentBill.Date = DateTime.Now;
+                db.Entry(installmentBill).State = EntityState.Modified;
+                Session["IBill"] = installmentBill;
+                db.SaveChanges();
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
-            return View(cashBill);
+            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "CustomerCode", installmentBill.CustomerID);
+            return View(installmentBill);
         }
         // Edit 2 copy Create 2
         [HttpPost]

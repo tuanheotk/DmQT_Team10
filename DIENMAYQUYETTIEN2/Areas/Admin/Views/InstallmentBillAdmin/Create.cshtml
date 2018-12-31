@@ -16,7 +16,13 @@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true)
 
-
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BillCode, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.BillCode, new { @class = "form-control", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.BillCode)
+                    </div>
+                </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -58,7 +64,7 @@
                             <option value="Ngày">Ngày</option>
                             <option value="Tuần">Tuần</option>
                             <option value="Tháng">Tháng</option>
-                            <option value="Tháng">Năm</option>
+                            <option value="Năm">Năm</option>
                         </select>
                         @Html.ValidationMessageFor(model => model.Method)
                     </div>
