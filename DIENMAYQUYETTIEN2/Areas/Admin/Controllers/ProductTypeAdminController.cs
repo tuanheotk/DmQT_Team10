@@ -58,5 +58,45 @@ namespace DIENMAYQUYETTIEN2.Areas.Admin.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
+
+
+        // GET: Admin/ProductTypes/Create
+        public ActionResult Create()
+        {
+            if (Session["UserName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        // POST: Admin/ProductTypes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ProductType productType)
+        {
+            checkProductType(productType);
+            if (ModelState.IsValid)
+            {
+                db.ProductTypes.Add(productType);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(productType);
+        }
+
+        public void checkProductType(ProductType pt)
+        {
+            if (pt.ProductTypeCode.Length > 3)
+                ModelState.AddModelError("ProductTypeCode", "ProductTypeCode phải nhỏ hơn 3 kí tự!");
+            if (pt.ProductTypeName.Length > 100)
+                ModelState.AddModelError("ProductTypeName", "ProductTypeName phải nhỏ hơn 100!");
+        }
     }
 }
