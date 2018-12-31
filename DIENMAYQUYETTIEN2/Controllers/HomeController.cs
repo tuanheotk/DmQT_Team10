@@ -46,6 +46,10 @@ namespace DIENMAYQUYETTIEN2.Controllers
             return View();
         }
 
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
 
     }
 }

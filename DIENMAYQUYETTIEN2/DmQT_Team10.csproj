@@ -610,6 +610,7 @@
     <Content Include="vendor\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="vendor\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
